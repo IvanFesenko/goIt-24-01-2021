@@ -5,7 +5,7 @@ export const loggerMiddleware = ({getState, dispatch}) => {
             console.info('action.payload ====>>', action.payload);
         }
 
-        next(action);
+        return next(action);
     };
 }
 

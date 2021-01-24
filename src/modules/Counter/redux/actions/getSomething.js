@@ -7,4 +7,5 @@ const getSomething = (params) => {
     }
 }
 
+
 export default getSomething;

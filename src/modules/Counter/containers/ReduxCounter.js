@@ -21,8 +21,7 @@ const ReduxCounter = () => {
 
     const handleGetSomething = async () => {
         setLoading(true);
-        const result = await getSomething();
-        console.log("-> result", result);
+        await getSomething();
         setLoading(false);
     }
 

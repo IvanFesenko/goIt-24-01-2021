@@ -3,7 +3,7 @@ const typeSuffix = {
     fail: '_FAIL'
 }
 
-export const requestMiddleware = (_state) =>
+export const requestMiddleware = ({dispatch}) =>
     next => action => {
         if (!action.request) {
             return next(action)
@@ -23,13 +23,12 @@ export const requestMiddleware = (_state) =>
                 if (contentType) {
                     const data = await response.json();
 
-                    next({...action, type: `${type}${typeSuffix.success}`, payload: {...payload, data}})
+                    next({type: `${type}${typeSuffix.success}`, payload: {...payload, ...data}})
 
-                    return {data};
+                    return {...data};
                 }
 
                 throw {message: "Couldn't resolve response", code: response.status}
-
 
             } catch (e) {
                 let error = {};
@@ -40,12 +39,13 @@ export const requestMiddleware = (_state) =>
                     const {message, code} = e.payload;
                     error = {message, code};
                 }
-                next({...action, type: `${type}${typeSuffix.fail}`, payload: {...payload, error}});
+                next({type: `${type}${typeSuffix.fail}`, payload: {...payload, error}});
 
                 return {error}
 
             }
-        }
+        };
+
         return makeRequest();
     };
 
