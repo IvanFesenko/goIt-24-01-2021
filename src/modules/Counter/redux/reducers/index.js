@@ -1,14 +1,18 @@
 export const actionTypes = {
     INCREMENT: 'INCREMENT',
     DECREMENT: 'DECREMENT',
-    GET_SOMETHING: 'GET_SOMETHING',
-    GET_SOMETHING_SUCCESS: 'GET_SOMETHING_SUCCESS',
-    GET_SOMETHING_FAIL: 'GET_SOMETHING_FAIL',
+    GET_CURRENCY: 'GET_CURRENCY',
+    GET_CURRENCY_SUCCESS: 'GET_CURRENCY_SUCCESS',
+    GET_CURRENCY_FAIL: 'GET_CURRENCY_FAIL',
+    GET_CURRENCY_LIST: 'GET_CURRENCY_LIST',
+    GET_CURRENCY_LIST_SUCCESS: 'GET_CURRENCY_LIST_SUCCESS',
+    GET_CURRENCY_LIST_FAIL: 'GET_CURRENCY_LIST_FAIL',
 }
 
 const initialState = {
     counter: 0,
-    something: null
+    currency: null,
+    currencyList: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -20,8 +24,11 @@ const reducer = (state = initialState, action) => {
         case (actionTypes.DECREMENT):
             return {...state, counter: state.counter - 1}
 
-        case (actionTypes.GET_SOMETHING_SUCCESS):
-            return {...state, something: action.payload}
+        case (actionTypes.GET_CURRENCY_SUCCESS):
+            return {...state, currency: action.payload}
+
+        case (actionTypes.GET_CURRENCY_LIST_SUCCESS):
+            return {...state, currencyList: action.payload}
 
         default:
             return state;
